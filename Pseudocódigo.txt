@@ -1,0 +1,35 @@
+Algoritmo Interpolacion_Lagrange
+
+Entradas:
+    x_points ← vector con puntos conocidos [x0, x1, ..., xn]
+    y_points ← vector con valores f(x) correspondientes [f(x0), f(x1), ..., f(xn)]
+    x ← punto en el cual se quiere estimar el valor de f(x)
+    valor_real ← valor exacto de f(x) (para calcular error)
+
+Salidas:
+    y_interp ← valor interpolado en x
+    error ← error relativo porcentual entre y_interp y valor_real
+
+Inicio
+
+1. Definir n ← longitud(x_points) - 1
+2. Inicializar y_interp ← 0
+
+3. Para i desde 0 hasta n hacer
+    a. Inicializar L ← 1
+
+    b. Para j desde 0 hasta n hacer
+        i. Si j ≠ i entonces
+            L ← L * (x - x_points[j]) / (x_points[i] - x_points[j])
+        FinSi
+    FinPara
+
+    c. y_interp ← y_interp + y_points[i] * L
+FinPara
+
+4. error ← |(y_interp - valor_real) / valor_real| * 100
+
+5. Retornar y_interp, error
+
+Fin
+
