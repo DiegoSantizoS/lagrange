@@ -1,35 +1,32 @@
-Algoritmo Interpolacion_Lagrange
+Función lagrange_interp(x_points, y_points, x, valor_real)
+    Entrada:
+        x_points: arreglo con los valores conocidos de x
+        y_points: arreglo con los valores correspondientes f(x)
+        x: punto en el cual se desea interpolar
+        valor_real: valor real de f(x) para cálculo de error
 
-Entradas:
-    x_points ← vector con puntos conocidos [x0, x1, ..., xn]
-    y_points ← vector con valores f(x) correspondientes [f(x0), f(x1), ..., f(xn)]
-    x ← punto en el cual se quiere estimar el valor de f(x)
-    valor_real ← valor exacto de f(x) (para calcular error)
+    Salida:
+        y_interp: valor estimado por interpolación
+        error: error relativo porcentual
 
-Salidas:
-    y_interp ← valor interpolado en x
-    error ← error relativo porcentual entre y_interp y valor_real
+    Inicio
+        n ← longitud de x_points - 1
+        y_interp ← 0
 
-Inicio
+        Para i desde 0 hasta n hacer
+            L ← 1
 
-1. Definir n ← longitud(x_points) - 1
-2. Inicializar y_interp ← 0
+            Para j desde 0 hasta n hacer
+                Si j ≠ i entonces
+                    L ← L * (x - x_points[j]) / (x_points[i] - x_points[j])
+                Fin Si
+            Fin Para
 
-3. Para i desde 0 hasta n hacer
-    a. Inicializar L ← 1
+            y_interp ← y_interp + y_points[i] * L
+        Fin Para
 
-    b. Para j desde 0 hasta n hacer
-        i. Si j ≠ i entonces
-            L ← L * (x - x_points[j]) / (x_points[i] - x_points[j])
-        FinSi
-    FinPara
+        error ← valor absoluto de ((y_interp - valor_real) / valor_real) * 100
 
-    c. y_interp ← y_interp + y_points[i] * L
-FinPara
-
-4. error ← |(y_interp - valor_real) / valor_real| * 100
-
-5. Retornar y_interp, error
-
-Fin
-
+        Retornar y_interp, error
+    Fin
+Fin Función
